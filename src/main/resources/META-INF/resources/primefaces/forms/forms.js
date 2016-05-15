@@ -839,6 +839,11 @@ PrimeFaces.widget.SelectOneMenu = PrimeFaces.widget.DeferredWidget.extend({
                 break;
 
                 default:
+                    //function keys (F1,F2 etc.)
+                    if(key >= 112 && key <= 123) {
+                        break;
+                    }
+                    
                     var text = $(this).val(),
                     matchedOptions = null,
                     metaKey = e.metaKey||e.ctrlKey||e.shiftKey;
@@ -902,6 +907,11 @@ PrimeFaces.widget.SelectOneMenu = PrimeFaces.widget.DeferredWidget.extend({
                 break;
 
                 default:
+                    //function keys (F1,F2 etc.)
+                    if(key >= 112 && key <= 123) {
+                        break;
+                    }
+                    
                     var metaKey = e.metaKey||e.ctrlKey;
                     
                     if(!metaKey) {
@@ -3377,6 +3387,7 @@ PrimeFaces.widget.SplitButton = PrimeFaces.widget.BaseWidget.extend({
     },
 
     hide: function() {
+        this.menuitems.filter('.ui-state-hover').removeClass('ui-state-hover');
         this.menuButton.removeClass('ui-state-focus');
 
         this.menu.fadeOut('fast');
