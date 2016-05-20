@@ -11545,7 +11545,7 @@ var effectTransfer = $.effects.effect.transfer = function( o, done ) {
 				if (this.$timeObj[0].setSelectionRange) {
 					var sPos = this.$timeObj[0].selectionStart;
 					var ePos = this.$timeObj[0].selectionEnd;
-					this.$timeObj[0].setSelectionRange(sPos, ePos);
+					//this.$timeObj[0].setSelectionRange(sPos, ePos); // Primefaces github issue; #1421
 				}
 			}
 
@@ -14243,3 +14243,17 @@ $(function() {
   };
 
 })(jQuery);
+
+
+/* Primefaces Extensions */
+(function () {
+    var original_gotoToday = $.datepicker._gotoToday;
+
+    $.datepicker._gotoToday = function (id) {
+        var target = $(id),
+            inst = this._getInst(target[0]);
+
+        original_gotoToday.call(this, id);
+        this._selectDate(id, this._formatDate(inst, inst.selectedDay, inst.drawMonth, inst.drawYear));
+    };
+})();
